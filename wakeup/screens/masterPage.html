@@ -1,0 +1,196 @@
+<!doctype html>
+{% load staticfiles %}
+<html lang="en">
+  <head>
+  	<title>Machine Learning</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+		
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href='{% static "css/style.css" %}'>
+    
+
+
+
+
+   
+
+
+  </head>
+  <body style="background-color:#cedcdf;">
+    <!-- <body>		 -->
+		<div class="wrapper d-flex align-items-stretch">
+			<nav id="sidebar">
+				<div class="custom-menu">
+					<button type="button" id="sidebarCollapse" class="btn btn-primary">
+	          <i class="fa fa-bars"></i>
+	          <span class="sr-only">Toggle Menu</span>
+	        </button>
+        </div>
+				<div class="p-4 pt-5">
+          <h1><a href="/" class="logo">
+            <img style="opacity: 1;" src="/static/img/wakeupLogo.jpeg"  style="height: 10%; width: 10%;">
+          </a></h1>
+	        <ul class="list-unstyled components mb-5">
+            <!-- <li>
+            <a class="" href="/accountInfo"><span class="hello-msg"><font  color="black" > Hello, {{request.user}}
+            </li> -->
+              <!-- <li class="active">
+	            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+	            <ul class="collapse list-unstyled" id="homeSubmenu">
+                <li>
+                    <a href="#">Home 1</a>
+                </li>
+                <li>
+                    <a href="#">Home 2</a>
+                </li>
+                <li>
+                    <a href="#">Home 3</a>
+                </li>
+	            </ul>
+	          </li> -->
+	          <li class="{% block activehome %} {% endblock activehome %}">
+	              <a href="/">Home</a>
+            </li>
+            
+	          <li >
+              <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle ">Projects</a>
+              <ul class="collapse list-unstyled" id="pageSubmenu">
+                <li class=" {% block activeobject %} {% endblock activeobject %}">
+                  <a href="#pageSubmenuimage" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle ">Object</a>
+                  <ul class="collapse list-unstyled" id="pageSubmenuimage">
+                    <li>
+                      <a href="/Image">Image</a>
+                  </li>
+                  <li>
+                    <a href="/Video">Video</a>
+                </li>
+                </ul>
+                </li>
+                <li class=" {% block activeface %} {% endblock activeface %}">
+                  <a href="#pageSubmenuvideo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle ">Face</a>
+                  <ul class="collapse list-unstyled" id="pageSubmenuvideo">
+                    <li>
+                      <a href="faceimage">Image</a>
+                  </li>
+                  <li>
+                    <a href="/video/">Video</a>
+                </li>
+                </ul>
+                </li>
+                <!-- <li>
+                    <a href="#">Page 3</a>
+                </li> -->
+              </ul>
+	          </li>
+            <li class="{% block activevideo %}  {% endblock activevideo %}">
+	            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Camera Screen</a>
+	            <ul class="collapse list-unstyled" id="homeSubmenu">
+                <li>
+                    <a href="/videoScreen">3x3</a>
+                </li>
+                <li>
+                    <a href="/vid5">5x5</a>
+                </li>
+                <li>
+                    <a href="/vid9">9x9</a>
+                </li>
+	            </ul>
+	          </li>
+            
+            
+            <!-- <li>
+              <a href="#">Portfolio</a>
+            </li> -->
+            
+            <li class="nav-item {% block activeuser %} {% endblock activeuser %}">
+                <a class="nav-link " href="/emp">
+                </i> Add User
+                </a>
+            </li>
+            
+      
+            
+              <li class="nav-item {% block activemanage %} {% endblock activemanage %}">
+                  <a class="nav-link" href="/show"> Manage User</a>
+              </li>
+              <li class="nav-item {% block activehistory %} {% endblock activehistory %}">
+                <a href="/history_image">History</a>
+            </li>
+
+            <!-- <li>
+              <a href="#pageSubmenuvideo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">History Page</a>
+              <ul class="collapse list-unstyled" id="pageSubmenuvideo">
+                <li>
+                  <a href="/history_image">Image</a>
+              </li>
+              <li>
+                <a href="history_video">Video</a>
+            </li> -->
+            </ul>
+            </li>
+              <!-- <a class=""  href="/logout"> <font  color="red"> Logout
+              </font> </a> -->
+	        </ul>
+
+	        <!-- <div class="mb-5">
+						<h3 class="h6">Subscribe for newsletter</h3>
+						<form action="#" class="colorlib-subscribe-form">
+	            <div class="form-group d-flex">
+	            	<div class="icon"><span class="icon-paper-plane"></span></div>
+	              <input type="text" class="form-control" placeholder="Enter Email Address">
+	            </div>
+	          </form>
+					</div> -->
+
+	        <div class="footer">
+	        	<p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						  &copy;<script></script>
+						  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+	        </div>
+
+        </div>
+        
+    	</nav>
+
+        <!-- Page Content  -->
+       <!-- <div class="container-fluid">
+        <div class='row'>
+          <div class="col offset-md-11">
+            <div class="dropdown">
+              <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                <img src="/static/img/Avatar.png" style="opacity: 1;" alt="Avatar" class="avatar">
+              <span class="caret"></span></button>
+              <ul class="dropdown-menu">
+                <li><a href="#">HTML</a></li>
+                <li><a href="#">CSS</a></li>
+                <li><a href="#">JavaScript</a></li>
+              </ul>
+            </div>
+            <!-- <button class="btn btn-primary" style="margin: 0px;" type="submit">
+              <img src="/static/img/Avatar.png" style="opacity: 1;" alt="Avatar" class="avatar">
+            </button> -->
+          <!-- </div>
+        </div>
+      </div> -->
+        
+
+        
+      <div id="content" class="p-4 p-md-5 pt-5">
+        {%block content %} 
+        
+    
+        {% endblock %}
+    
+        <hr>
+      </div>
+		</div>
+
+    <script src='{% static "js/jquery.min.js" %}'></script>
+    <script src='{% static "js/popper.js" %}'></script>
+    <script src='{% static "js/bootstrap.min.js" %}'></script>
+    <script src='{% static "js/main.js" %}'></script>
+  </body>
+</html>

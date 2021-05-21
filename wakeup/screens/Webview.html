@@ -1,0 +1,41 @@
+{% extends 'masterPage.html' %}
+{% block activehome %} active {% endblock activehome %}
+{% block content %} 
+  <body style="background-image: url(static/q.jpg); background-attachment: fixed ; background-repeat: no-repeat; background-position: center; background-size: cover;">
+    
+
+      
+
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div class="card" style="width: 18rem;">
+              <img src="/static/dead.jpg"  style="height: 10rem; " class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">OBJECT ANALYSIS</h5>
+                <p class="card-text">Click here for analysis of an image you have.</p>
+                <a href="Image"  class="btn btn-primary" style="margin-bottom: 15px;">Analyse Image</a>
+                <br>
+                <a href="Video" class="btn btn-primary">Analyse Video</a>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col">
+            <div class="card" style="width: 18rem;">
+              <img src="/static/z.jpg" style="height: 10rem; " class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">FACE ANALYSIS</h5>
+                <p class="card-text">Click here for the analysis of a video you have.</p>
+                <a href="faceimage" class="btn btn-primary"style="margin-bottom: 15px;">Analyse Image</a>
+                <a href="/video/" class="btn btn-primary">Analyse Video</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      
+  </body>
+  {% endblock content%}

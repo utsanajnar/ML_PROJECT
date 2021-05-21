@@ -1,0 +1,121 @@
+{% extends 'masterPage.html' %}
+{% block activeobject %} active {% endblock activeobject %}
+{% block content %}
+  <body>
+    <script>
+      function preview_images() 
+      {
+       var total_file=document.getElementById("images").files.length;
+       for(var i=0;i<total_file;i++)
+       {
+        $('#image_preview').append("<div class='col-md-3'><img class='img-responsive' src='"+URL.createObjectURL(event.target.files[i])+"'></div>");
+       }
+      }
+      </script>
+    
+    <style>
+      .buttonload {
+        background-color: #4CAF50; /* Green background */
+        border: none; /* Remove borders */
+        color: white; /* White text */
+        padding: 8px 20px; /* Some padding */
+        font-size: 16px; /* Set a font-size */
+      }
+      
+      /* Add a right margin to each icon */
+      .fa {
+        margin-left: -12px;
+        margin-right: 8px;
+      }
+      </style>
+
+
+      
+
+      <div class="container container-md" style=" opacity: .8 ; height: 200px; border-radius: 12px; padding-top: 35px; padding-left: 10%; padding-right: 10%; background-color: lightgray; box-shadow: lightslategray 3px 3px 8px;">
+        <div class="input-group mb-3">
+            <form action="upload" method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+                <input type="file" id="myimage" name="image" value="image">
+                <input type="submit" value="upload">
+            </form>
+            
+        </div>
+        
+        <a onclick="move()" href="image_list" class="btn btn-success">Analyse</a>
+        
+        <button id= "Loadbtn" class="buttonload" style="display: none">
+          <i class="fa fa-spinner fa-spin"></i>Loading
+        </button>
+      </div>
+
+    <div class="container" id="text" style=" opacity: .8 ; padding-top: 10em; padding-bottom: 10em; height: 200px; border-radius: 12px; padding-top: 35px; padding-left: 10%; padding-right: 10%; background-color: lightgray; box-shadow: lightslategray 3px 3px 8px;">
+      <h2>Please click analyse after uploading the image</h2>
+    </div>
+    
+    <!-- <div id="action" style="display: none;">
+      <div class="image-detection" style="padding-bottom: 5em; padding-top: 5em;">
+        <div class="row">
+          <div class="col-sm-6" >
+            <img src="/static/image_output.jpg" width="100%" height="100%" alt="...">
+          </div>
+        
+          <div class="col-sm-6" style="text-align: center; opacity: 0.8;  background-color: lightgray; padding-bottom: 5em;">
+            <h2>No of Objects: {{count}}</h2>
+            
+            <h3> object list</h3>
+            {%for key,value in context.items %}
+              <t>{{value}}</t>
+            {%endfor%}
+          </div>
+        </div>
+      </div>
+    
+    
+        <div class="container vertical-scrollable">  
+          <div class="row text-center">  
+          {%for key,value in context.items %}
+            <div class="col-sm-4">
+              <div class="card" style="width: 18rem; border: 1px solid black;">
+                <img class="card-img-top" src="/static/{{value}}_image.jpg" alt="Card image cap">
+                <div class="card-body" style="background-color: teal;">
+                  <h5 class="card-title">{{value}}</h5>
+                </div>
+              </div>
+            </div>
+          {%endfor%}  
+          </div>  
+        </div>
+    </div> -->
+
+    <script>
+      
+      function move() {
+      
+          var elem = document.getElementById("Loadbtn").style.display="block";
+          // var elem = document.getElementById("text").style.display="none";
+          // var elem = document.getElementById("action").style.display="block";
+          return false;
+      }
+  </script>
+      
+
+
+
+      
+  
+    
+    <script type="text/javascript" src="/static/mdb/js/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="/static/mdb/js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="/static/mdb/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="/static/mdb/js/mdb.min.js"></script>
+    <!-- Your custom scripts (optional) -->
+    <script type="text/javascript"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  </body>
+  {% endblock content%}

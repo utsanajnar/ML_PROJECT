@@ -1,0 +1,4 @@
+cell phone
+laptop
+person
+tv

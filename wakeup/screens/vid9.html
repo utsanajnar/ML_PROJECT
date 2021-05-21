@@ -1,0 +1,35 @@
+{% extends 'masterPage.html' %}
+  
+  {% block activevideo %} active {% endblock activevideo %}
+  {% block content %}
+    
+  
+        <!-- HERE THE CODE FOR THE ALTERNATIVE PLAYER (FLASH) WILL BE! -->
+
+        <div class="container" style="width:1700px; height:10px">
+          <button  type="button" onclick="window.location.href='/videoScreen';" class="btn btn-light" >3x3</button>
+          <button  type="button" onclick="window.location.href='/vid5';" class="btn btn-light ">5x5</button>
+          <button  type="button" onclick="window.location.href='/vid9';" class="btn btn-light active" >9x9</button>
+    {%for k in range9 %}
+        <div class="row " >
+        {%for k in range9 %}  
+
+        <div class="col-sm-6 col-12 col-md col-lg mt-2 mb-2 ml-2 mr-2" >
+            
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item "  src="https://www.youtube.com/embed/v64KOxKVLVg" allowfullscreen ></iframe>
+              </div>
+          </div>
+          
+        {%endfor%}
+
+        
+        </div>
+        
+        
+      
+    {%endfor%}
+
+</div> 
+
+  {% endblock content%}

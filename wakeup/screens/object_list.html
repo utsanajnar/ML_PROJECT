@@ -1,0 +1,322 @@
+
+{% extends 'masterPage.html' %}
+{% block activeobject %} active {% endblock activeobject %}
+{% block content %}   
+
+  <body>
+    
+    <style>
+      .buttonload {
+        background-color: #4CAF50; /* Green background */
+        border: none; /* Remove borders */
+        color: white; /* White text */
+        padding: 8px 20px; /* Some padding */
+        font-size: 16px; /* Set a font-size */
+      }
+      
+      /* Add a right margin to each icon */
+      .fa {
+        margin-left: -12px;
+        margin-right: 8px;
+      }
+      </style>
+  
+    <style> 
+        
+         .vertical-scrollable> .row { 
+            /* position: absolute;  */
+            /* top: 120px; 
+            bottom: 100px; 
+            left: 180px; 
+            width: 50%;  */
+            overflow-y: scroll;
+            background-color: azure;
+             
+            position: relative;
+            border: 1px solid black; 
+          } 
+          .col-sm-4 {  
+              color: black;  
+              font-size: 24px;  
+              padding-bottom: 20px;  
+              padding-top: 18px;  
+          }  
+          
+          .card-img-top:hover {
+              transform: scale(1.5);
+          } 
+    
+      </style>
+  
+  <style>
+    body {font-family: Arial, Helvetica, sans-serif;}
+    
+    /* The Modal (background) */
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      padding-top: 100px; /* Location of the box */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+    
+    /* Modal Content */
+    .modal-content {
+      background-color: #fefefe;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+    }
+    
+    /* The Close Button */
+    .close {
+      color: #aaaaaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    
+    .close:hover,
+    .close:focus {
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    </style>
+
+
+  <div class="container container-md" style=" opacity: .8 ; height: 200px; border-radius: 12px; padding-top: 35px; padding-left: 10%; padding-right: 10%; background-color: lightgray; box-shadow: lightslategray 3px 3px 8px;">
+    <div class="input-group mb-3">
+        <form action="upload_video" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+            <input type="file" id="myvideo" name="video" value="video">
+            <input type="submit" value="upload_video">
+        </form>
+        
+    </div>
+    <a href="Object_List" class="btn btn-success">Analyse</a>
+  </div>
+
+
+  <!-- <div class="movie1">
+    <video name='alone' controls autoplay width='50%' height='50%' style="padding-bottom: 5em;">
+      <source src="/static/output_list.webm" ></source>
+    </video>
+  </div> -->
+
+  <div class="image-detection" style="padding-bottom: 5em; padding-top: 5em;">
+    <div class="row">
+      <div class="col-sm-8" >
+        <video name='alone' controls autoplay width='80%' height='80%' style="padding-bottom: 5em;">
+          <source src="{{outputfile}}output_list.webm" ></source>
+        </video>
+      </div>
+    
+      <div class="col-sm-4">
+        
+        <!-- <h2>No of Objects: {{count}}</h2>
+      
+        <h3> object list</h3>
+        {%for key,value in context.items %}
+          <t>{{value}}</t>
+        {%endfor%} -->
+        <div class="card" style="width: 18rem; border: 1px solid black;">
+          <!-- <img class="card-img-top" src="#" alt="Card image cap"> -->
+          <div class="card-body" style="background-color: teal;">
+            <h5 class="card-title">
+              <h2>No of Objects: {{count}}</h2>
+        
+              <h3> Object list: </h3>
+              {%for key,value in context.items %}
+                <p>-> {{value}}</p>
+              {%endfor%}
+            </h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="container vertical-scrollable">  
+    <div class="row text-center">  
+    {%for key,value in context.items %}
+      <div class="col-sm-4">
+        <div class="card" style="width: 18rem;">
+          <img class="card-img-top" src="{{outputfile}}{{value}}_first.jpg" alt="Card image cap">
+          <div class="card-body" style="background-color: teal;">
+            <h5 class="card-title">{{value}}</h5>
+              
+            <div class="btn btn-primary" id="myBtn{{value}}" onclick="document.getElementById('myModal{{value}}').style.display='block'">Clips</div>
+            <div id="myModal{{value}}" class="modal">
+              <!-- Modal content -->
+              <div class="modal-content">
+                <span class="close" onclick="document.getElementById('myModal{{value}}').style.display='none'">&times;</span>
+                <div class="movie1">
+                  <center>
+                    <video name='alone' controls autoplay width='80%' height='80%'>
+                      <source src="{{outputfile}}{{value}}_clip.webm" ></source>
+                    </video>
+                  </center>
+                </div>
+              </div>
+            </div>
+            <script>
+              // Get the modal
+              var modal = document.getElementById("myModal{{value}}");
+              
+              // Get the button that opens the modal
+              var btn = document.getElementById("myBtn{{value}}");
+              
+              // Get the <span> element that closes the modal
+              var span = document.getElementsByClassName("close")[0];
+              
+              // When the user clicks the button, open the modal 
+              // btn.onclick = function() {
+              //   modal.style.display = "block";
+              // }
+              
+              // When the user clicks on <span> (x), close the modal
+              // span.onclick = function() {
+              //   modal.style.display = "none";
+              // }
+              
+              // When the user clicks anywhere outside of the modal, close it
+              window.onclick = function(event) {
+                if (event.target == modal) {
+                  modal.style.display = "none";
+                }
+              }
+              </script>
+            <div class="btn btn-primary" id="myBtn1{{value}}" onclick="document.getElementById('myModal1{{value}}').style.display='block'">Detection</div>
+            <div id="myModal1{{value}}" class="modal">
+              <!-- Modal content -->
+              <div class="modal-content">
+                <span class="close" onclick="document.getElementById('myModal1{{value}}').style.display='none'">&times;</span>
+                <div class="movie1">
+                  <center>
+                    <video name='alone' controls autoplay width='80%' height='80%'>
+                      <source src="{{outputfile}}{{value}}_alone.webm" ></source>
+                    </video>
+                  </center>
+                </div>
+              </div>
+            </div>
+            <script>
+              // Get the modal
+              var modal1 = document.getElementById("myModal1{{value}}");
+              
+              // Get the button that opens the modal
+              var btn1 = document.getElementById("myBtn1{{value}}");
+              
+              // Get the <span> element that closes the modal
+              var span = document.getElementsByClassName("close")[0];
+              
+              // When the user clicks the button, open the modal 
+              // btn1.onclick = function() {
+              //   modal1.style.display = "block";
+              // }
+              
+              // When the user clicks on <span> (x), close the modal
+              // span.onclick = function() {
+              //   modal1.style.display = "none";
+              // }
+              
+              // When the user clicks anywhere outside of the modal, close it
+              window.onclick = function(event) {
+                if (event.target == modal1) {
+                  modal1.style.display = "none";
+                }
+              }
+              </script>
+          </div>
+        </div>
+      </div>
+    {%endfor%}  
+    </div>  
+  </div>
+  
+  <!-- <div class="container vertical-scrollable">  
+    <div class="row text-center">  
+    {%for key,value in context.items %}
+      <div class="col-sm-4">
+        <div class="card" style="width: 18rem;">
+          <img class="card-img-top" src="/static/{{value}}_first.jpg" alt="Card image cap">
+          <div class="card-body" style="background-color: teal;">
+            <h5 class="card-title">{{value}}</h5>
+            
+            <a href={% url 'Clips' inputlabel=value %} class="btn btn-primary">Clips</a>
+            <a href={% url 'Object' inputlabel=value %} class="btn btn-primary">Detection</a>
+          </div>
+        </div>
+      </div>
+    {%endfor%}  
+    </div>  
+  </div> -->
+    
+
+  <script>
+      
+    function move() {
+    
+        var elem = document.getElementById("Loadbtn").style.display="block";
+        // var elem = document.getElementById("text").style.display="none";
+        // var elem = document.getElementById("action").style.display="block";
+        return false;
+    }
+  </script>
+     
+     <!-- <script>
+      // Get the modal
+      var modal = document.getElementById("myModal");
+      
+      // Get the button that opens the modal
+      var btn = document.getElementById("myBtn");
+      var btn1 = document.getElementById("myBtn1");
+      
+      // Get the <span> element that closes the modal
+      var span = document.getElementsByClassName("close")[0];
+      
+      // When the user clicks the button, open the modal 
+      btn.onclick = function() {
+        modal.style.display = "block";
+      }
+      btn1.onclick = function() {
+        modal.style.display = "block";
+      }
+      
+      // When the user clicks on <span> (x), close the modal
+      span.onclick = function() {
+        modal.style.display = "none";
+      }
+      
+      // When the user clicks anywhere outside of the modal, close it
+      window.onclick = function(event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      }
+      </script> -->
+
+<script type="text/javascript" src="/static/mdb/js/jquery.min.js"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="/static/mdb/js/popper.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="/static/mdb/js/bootstrap.min.js"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="/static/mdb/js/mdb.min.js"></script>
+  <!-- Your custom scripts (optional) -->
+  <script type="text/javascript"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  </body>
+  {% endblock content%}

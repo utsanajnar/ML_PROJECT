@@ -1,0 +1,120 @@
+{% extends 'masterPage.html' %}
+{% block activeobject %} active {% endblock activeobject %}
+{% block content %}
+  <body>
+
+    <style> 
+      
+      .vertical-scrollable> .row { 
+         /* position: absolute;  */
+         /* top: 120px; 
+         bottom: 100px; 
+         left: 180px; 
+         width: 50%;  */
+         overflow-y: scroll;
+         overflow-x: scroll;
+         background-color: wheat;
+         max-width: 100%;
+         position: relative;
+         border: 1px solid black; 
+       } 
+       .col-sm-4 {  
+           color: black;  
+           font-size: 24px;  
+           padding-bottom: 20px;  
+           padding-top: 18px;
+       }  
+
+       .card-img-top:hover {
+           transform: scale(1.5);
+       }  
+ 
+   </style>
+    
+   
+
+  <div class="container container-md" style=" opacity: .8 ; height: 200px; border-radius: 12px; padding-top: 35px; padding-left: 10%; padding-right: 10%; background-color: lightgray; box-shadow: lightslategray 3px 3px 8px;">
+    <div class="input-group mb-3">
+        <form action="upload" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+            <input type="file" id="myimage" name="image" value="image">
+            <input type="submit" value="upload">
+        </form>
+        
+    </div>
+    <a href="image_list" class="btn btn-success">Analyse</a>
+</div>
+      
+  <div class="image-detection" style="padding-bottom: 5em; padding-top: 5em;">
+    <div class="row">
+      <div class="col-sm-8">
+        <div class="container" style="padding left: 5em">
+          <img src='{{outputfile}}image_output.jpg' width="80%" height="80%" alt="...">
+        </div>
+      </div>
+    
+      <div class="col-sm-4">
+        
+          <!-- <h2>No of Objects: {{count}}</h2>
+        
+          <h3> object list</h3>
+          {%for key,value in context.items %}
+            <t>{{value}}</t>
+          {%endfor%} -->
+          <div class="card" style="width: 18rem; border: 1px solid black;">
+            <!-- <img class="card-img-top" src="#" alt="Card image cap"> -->
+            <div class="card-body" style="background-color: teal;">
+              <h5 class="card-title">
+                <h2>No of Objects: {{count}}</h2>
+          
+                <h3> Object list: </h3>
+                {%for key,value in context.items %}
+                  <p>-> {{value}}</p>
+                {%endfor%}
+              </h5>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+
+
+    <div class="container vertical-scrollable">  
+      <div class="row text-center">  
+      {%for key,value in context.items %}
+        <div class="col-sm-4">
+          <div class="card" style="width: 18rem; border: 1px solid black;">
+            <img class="card-img-top" src="{{outputfile}}{{value}}_image.jpg" alt="Card image cap">
+            <div class="card-body" style="background-color: teal;">
+              <h5 class="card-title">{{value}}</h5>
+            </div>
+          </div>
+        </div>
+      {%endfor%}  
+      </div>  
+    </div>
+
+      
+
+
+      
+
+
+      
+
+
+<script type="text/javascript" src="/static/mdb/js/jquery.min.js"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="/static/mdb/js/popper.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="/static/mdb/js/bootstrap.min.js"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="/static/mdb/js/mdb.min.js"></script>
+  <!-- Your custom scripts (optional) -->
+  <script type="text/javascript"></script>
+  <script src="/static/bootstrap-4.5.2-dist/js/bootstrap.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  </body>
+  {% endblock content%}

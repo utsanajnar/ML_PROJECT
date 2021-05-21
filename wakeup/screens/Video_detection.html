@@ -1,0 +1,124 @@
+{% extends 'masterPage.html' %}
+{% block activeobject %} active {% endblock activeobject %}
+{% block content %} 
+  <body>
+    
+    <style>
+      .buttonload {
+        background-color: #4CAF50; /* Green background */
+        border: none; /* Remove borders */
+        color: white; /* White text */
+        padding: 8px 20px; /* Some padding */
+        font-size: 16px; /* Set a font-size */
+      }
+      
+      /* Add a right margin to each icon */
+      .fa {
+        margin-left: -12px;
+        margin-right: 8px;
+      }
+      </style>
+  
+  
+  
+  
+  
+  
+      <!-- <div class="container container-md" style=" opacity: .8 ; height: 200px; border-radius: 12px; padding-top: 35px; padding-left: 10%; padding-right: 10%; background-color: lightgray; box-shadow: lightslategray 3px 3px 8px;">
+          <div class="input-group mb-3">
+              <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="inputGroupFile02" name="pic1" required>
+                  <label class="custom-file-label"  style="border-color: black;" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose Image</label>
+              </div>
+              <div class="input-group-append" >
+                  <span class="input-group-text" id="inputGroupFileAddon02" style="margin-left: 10px; border-color: black ;">
+                      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-upload" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd" d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                          <path fill-rule="evenodd" d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
+                      </svg><a href="view">upload</a>
+                  </span>
+              </div>
+          </div>
+          <ul class="navbar-nav mr-auto">
+            
+          </ul>
+          <ul class="navbar-nav nav-flex-icons" >
+              <button onclick="move()" type="button" class="btn btn-dark" style="border-radius: 10px; margin-left: 30%; margin-right: 30%;"><b><a href="Object_List" class="btn btn-primary">Analyse</a></b></button>
+          </ul>
+          <div id="myProgress">
+            <div id="myBar" style="width: 5%;
+            border-radius: 5px;
+            height: 30px;
+            background-color: green;
+            text-align: center; /* To center it horizontally (if you want) */
+            line-height: 30px; /* To center it vertically */
+            color: white;">0%</div>
+        </div>
+      </div> -->
+
+      <div class="container container-md" style=" opacity: .8 ; height: 200px; border-radius: 12px; padding-top: 35px; padding-left: 10%; padding-right: 10%; background-color: lightgray; box-shadow: lightslategray 3px 3px 8px;">
+        <div class="input-group mb-3">
+            <form action="upload_video" method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+                <input type="file" id="myvideo" name="video" value="video">
+                <input type="submit" value="upload_video">
+            </form>
+            
+        </div>
+        <a onclick="move()" href="Object_List" class="btn btn-success">Analyse</a>
+        <button id= "Loadbtn" class="buttonload" style="display: none">
+          <i class="fa fa-spinner fa-spin"></i>Loading
+        </button>
+      </div>
+
+    <div class="container" id="text" style=" opacity: .8 ; padding-top: 10em; padding-bottom: 10em; height: 200px; border-radius: 12px; padding-top: 35px; padding-left: 10%; padding-right: 10%; background-color: lightgray; box-shadow: lightslategray 3px 3px 8px;">
+      <h2>Please click analyse after uploading the Video</h2>
+    </div>
+      
+    <script>
+      
+      function move() {
+      
+          var elem = document.getElementById("Loadbtn").style.display="block";
+          // var elem = document.getElementById("text").style.display="none";
+          // var elem = document.getElementById("action").style.display="block";
+          return false;
+      }
+    </script>
+
+      <!-- <script>
+        var i = 0;
+        function move() {
+        if (i == 0) {
+            i = 1;
+            var elem = document.getElementById("myBar");
+            var width = 10;
+            var id = setInterval(frame, 10);
+            function frame() {
+            if (width >= 100) {
+                clearInterval(id);
+                i = 0;
+            } else {
+                width++;
+                elem.style.width = width + "%";
+                elem.innerHTML = width + "%";
+            }
+            }
+        }
+        }
+    </script> -->
+
+
+   
+<script type="text/javascript" src="/static/mdb/js/jquery.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="/static/mdb/js/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="/static/mdb/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="/static/mdb/js/mdb.min.js"></script>
+<!-- Your custom scripts (optional) -->
+<script type="text/javascript"></script>
+</body>
+
+{% endblock content%}
